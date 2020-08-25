@@ -2021,7 +2021,7 @@ class _WebMessageState extends State<WebMessage> {
                         textColor: Color(0xffcccccc),
                         color: Color(0xffff8181),
                         child: Container(
-                            width: MediaQuery.of(context).size.width * 0.25,
+                            width: MediaQuery.of(context).size.width * 0.24,
                             child: Center(
                                 child: Text("Create",
                                     style: TextStyle(
