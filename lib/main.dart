@@ -43,9 +43,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _isSearch = false;
-   final TextEditingController orderSearch = TextEditingController();
- final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  
+  final TextEditingController orderSearch = TextEditingController();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   @override
   void initState() {
     super.initState();
@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
         setState(() {
-         
           // _firebaseMessaging.getToken().then((token) {
           //   print("token is: " + token);
           // });
@@ -74,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.20;
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       letterSpacing: 3,
                       fontWeight: FontWeight.bold))
               : TextField(
-                controller: orderSearch,
+                  controller: orderSearch,
                   autofocus: true,
                   cursorColor: Color(0xffff8181),
                   // maxLines: 1,
@@ -143,46 +143,56 @@ class _MyHomePageState extends State<MyHomePage> {
           // backgroundColor: Colors.black26,
           backgroundColor: Color(0xff202020),
           elevation: 0.0,
-          bottom: _isSearch == false?TabBar(
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorColor: Color(0xffff8181),
-              // indicatorPadding: EdgeInsets.fromLTRB(10, 0, 10, 12),
-              indicatorWeight: 2,
-              labelColor: Color(0xffff8181),
-              labelStyle:
-                  const TextStyle(color: Color(0xffff8181), fontSize: 13),
-              unselectedLabelColor: Colors.white,
-              unselectedLabelStyle:
-                  const TextStyle(color: Colors.white, fontSize: 13),
-              isScrollable: false,
-              tabs: [
-                Tab(icon: Container(child: Center(child: Text('Pending')))),
-                Tab(icon: Container(child: Center(child: Text('Complete')))),
-                Tab(icon: Container(child: Center(child: Text('Message')))),
-                Tab(icon: Container(child: Center(child: Text('Stats')))),
-              ]):null,
+          bottom: _isSearch == false
+              ? TabBar(
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorColor: Color(0xffff8181),
+                  // indicatorPadding: EdgeInsets.fromLTRB(10, 0, 10, 12),
+                  indicatorWeight: 2,
+                  labelColor: Color(0xffff8181),
+                  labelStyle:
+                      const TextStyle(color: Color(0xffff8181), fontSize: 13),
+                  unselectedLabelColor: Colors.white,
+                  unselectedLabelStyle:
+                      const TextStyle(color: Colors.white, fontSize: 13),
+                  isScrollable: false,
+                  tabs: [
+                      Tab(
+                          icon:
+                              Container(child: Center(child: Text('Pending')))),
+                      Tab(
+                          icon: Container(
+                              child: Center(child: Text('Complete')))),
+                      Tab(
+                          icon:
+                              Container(child: Center(child: Text('Message')))),
+                      Tab(icon: Container(child: Center(child: Text('Stats')))),
+                    ])
+              : null,
         ),
-        body: _isSearch == false?TabBarView(children: [
-          Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: OrderList(status: '0'),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: OrderList(status: '1'),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: WebMessage(),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Stats(),
-          ),
-        ]):Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: SearchList(orderId: orderSearch.text),
-          ),
+        body: _isSearch == false
+            ? TabBarView(children: [
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: OrderList(status: '0'),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: OrderList(status: '1'),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: WebMessage(),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: Stats(),
+                ),
+              ])
+            : Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: SearchList(orderId: orderSearch.text),
+              ),
         // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
@@ -204,7 +214,6 @@ class OrderList extends StatelessWidget {
           .orderBy('timestamp', descending: true)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         if (!snapshot.hasData)
           return Center(
@@ -224,14 +233,13 @@ class OrderList extends StatelessWidget {
           default:
             return new ListView(
               scrollDirection: Axis.vertical,
-              children:
-                  snapshot.data.docs.map((DocumentSnapshot document) {
+              children: snapshot.data.docs.map((DocumentSnapshot document) {
                 if (snapshot.data.docs != null) {
                   return OrderCard(
                     name: document.data()['name'],
                     phoneNumber: document.data()['phone'],
-                    time:
-                        DateFormat.jm().format(document.data()['timestamp'].toDate()),
+                    time: DateFormat.jm()
+                        .format(document.data()['timestamp'].toDate()),
                     date: DateFormat.yMMMd()
                         .format(document.data()['timestamp'].toDate()),
                     status: document.data()['completed'].toString(),
@@ -629,7 +637,7 @@ class _ViewOrderState extends State<ViewOrder> {
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
                                   fontWeight: FontWeight.bold)),
-                          Text(orderDetails["name"],
+                          Text(orderDetails.data()["name"],
                               style: TextStyle(
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
@@ -646,7 +654,7 @@ class _ViewOrderState extends State<ViewOrder> {
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
                                   fontWeight: FontWeight.bold)),
-                          Text(orderDetails["phone"],
+                          Text(orderDetails.data()["phone"],
                               style: TextStyle(
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
@@ -663,7 +671,8 @@ class _ViewOrderState extends State<ViewOrder> {
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
                                   fontWeight: FontWeight.bold)),
-                          Text(getdate(orderDetails['timestamp'], 'date'),
+                          Text(
+                              getdate(orderDetails.data()['timestamp'], 'date'),
                               style: TextStyle(
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
@@ -680,7 +689,8 @@ class _ViewOrderState extends State<ViewOrder> {
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
                                   fontWeight: FontWeight.bold)),
-                          Text(getdate(orderDetails['timestamp'], 'time'),
+                          Text(
+                              getdate(orderDetails.data()['timestamp'], 'time'),
                               style: TextStyle(
                                   fontSize: 18,
                                   color: Color(0xffcccccc),
@@ -714,7 +724,7 @@ class _ViewOrderState extends State<ViewOrder> {
                             mainAxisSize: MainAxisSize.max,
                           )),
                       SizedBox(height: 5),
-                      load(orderDetails["items"], widget.orderID),
+                      load(orderDetails.data()["items"], widget.orderID),
                       SizedBox(height: 5),
                       Container(
                           height: 1,
@@ -723,11 +733,11 @@ class _ViewOrderState extends State<ViewOrder> {
                             mainAxisSize: MainAxisSize.max,
                           )),
                       SizedBox(height: 5),
-                      gettotal(orderDetails["items"])
+                      gettotal(orderDetails.data()["items"])
                     ],
                   ),
                 ),
-                floatingActionButton: orderDetails["completed"] == '1'
+                floatingActionButton: orderDetails.data()["completed"] == '1'
                     ? FloatingActionButton.extended(
                         onPressed: () {
                           // Add your onPressed code here!
@@ -1096,8 +1106,8 @@ class _StatsState extends State<Stats> {
         .collection('burgerOrders')
         .snapshots()
         .listen((snapshot) {
-      int tempTotal = snapshot.docs
-          .fold(0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
+      int tempTotal = snapshot.docs.fold(
+          0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
 
       setState(() {
         lifetimeTotalMoney = tempTotal;
@@ -1113,8 +1123,8 @@ class _StatsState extends State<Stats> {
         .where("completed", isEqualTo: "1")
         .snapshots()
         .listen((snapshot) {
-      int tempTotal = snapshot.docs
-          .fold(0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
+      int tempTotal = snapshot.docs.fold(
+          0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
 
       setState(() {
         todayTotalMoney = tempTotal;
@@ -1131,8 +1141,8 @@ class _StatsState extends State<Stats> {
         .where("completed", isEqualTo: "1")
         .snapshots()
         .listen((snapshot) {
-      int tempTotal = snapshot.docs
-          .fold(0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
+      int tempTotal = snapshot.docs.fold(
+          0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
 
       setState(() {
         weeklyTotalMoney = tempTotal;
@@ -1148,8 +1158,8 @@ class _StatsState extends State<Stats> {
         .where("completed", isEqualTo: "1")
         .snapshots()
         .listen((snapshot) {
-      int tempTotal = snapshot.docs
-          .fold(0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
+      int tempTotal = snapshot.docs.fold(
+          0, (tot, doc) => tot + getTotalBurgerMoney(doc.data()['items']));
 
       setState(() {
         monthlyTotalMoney = tempTotal;
@@ -1806,8 +1816,9 @@ class _CustomBurgerState extends State<CustomBurger> {
       body: Padding(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: StreamBuilder<QuerySnapshot>(
-          stream:
-              FirebaseFirestore.instance.collection('customBurgerOrders').snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('customBurgerOrders')
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError)
@@ -1826,13 +1837,22 @@ class _CustomBurgerState extends State<CustomBurger> {
               default:
                 return new ListView(
                   scrollDirection: Axis.vertical,
-                  children:
-                      snapshot.data.docs.map((DocumentSnapshot document) {
+                  children: snapshot.data.docs.map((DocumentSnapshot document) {
                     if (snapshot.data.docs != null) {
-                      
-                      return loadcustomBurger(document.data()['orderDetails']);
-                    } 
-                    else {
+                      //  create a widget that would be returned
+                      Widget text;
+                      if (document.id == widget.orderId) {
+                        // populate the widget if it contains the custom burger we want
+                        text =
+                            loadcustomBurger(document.data()['orderDetails']);
+                      } else {
+                        text = Container(
+                            child: Center(
+                          child: Text('Something Went Wrong, try again later'),
+                        ));
+                      }
+                      return text;
+                    } else {
                       return new Text('empty');
                     }
                   }).toList(),
@@ -1982,22 +2002,62 @@ class _WebMessageState extends State<WebMessage> {
               duration: Duration(milliseconds: 2000),
             );
           default:
-            return new ListView(
-              scrollDirection: Axis.vertical,
-              children:
-                  snapshot.data.docs.map((DocumentSnapshot document) {
-                if (snapshot.data.docs != null) {
-                  return WebMessageCard(
-                    activity: document.data()['activity'],
-                    date: document.data()['date'],
-                    time: document.data()['time'],
-                    message: document.data()['message'],
-                    docId: document.id,
-                  );
-                } else {
-                  return new Text('empty');
-                }
-              }).toList(),
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: Text(
+                            "The messages created and\nactivated here would show up\nas a banner on the\nZux Burgers website.",
+                            style: TextStyle(
+                                fontSize: 11, fontStyle:FontStyle.italic, color: Color(0xffcccccc))),
+                      ),
+                      FlatButton(
+                        textColor: Color(0xffcccccc),
+                        color: Color(0xffff8181),
+                        child: Container(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            child: Center(
+                                child: Text("Create",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xff202020),
+                                    )))),
+                        onPressed: () {
+                          print('pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CreateWebMessage()));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: new ListView(
+                      scrollDirection: Axis.vertical,
+                      children:
+                          snapshot.data.docs.map((DocumentSnapshot document) {
+                        if (snapshot.data.docs != null) {
+                          return WebMessageCard(
+                            activity: document.data()['activity'],
+                            date: document.data()['date'],
+                            time: document.data()['time'],
+                            message: document.data()['message'],
+                            docId: document.id,
+                          );
+                        } else {
+                          return new Text('empty');
+                        }
+                      }).toList()),
+                ),
+              ],
             );
         }
       },
@@ -2184,6 +2244,7 @@ delete_web_message(String docID) {
     print("Error occured $onError");
   });
 }
+
 class SearchList extends StatelessWidget {
   final String orderId;
   const SearchList({
@@ -2218,14 +2279,13 @@ class SearchList extends StatelessWidget {
           default:
             return new ListView(
               scrollDirection: Axis.vertical,
-              children:
-                  snapshot.data.docs.map((DocumentSnapshot document) {
+              children: snapshot.data.docs.map((DocumentSnapshot document) {
                 if (snapshot.data.docs != null) {
                   return OrderCard(
                     name: document.data()['name'],
                     phoneNumber: document.data()['phone'],
-                    time:
-                        DateFormat.jm().format(document.data()['timestamp'].toDate()),
+                    time: DateFormat.jm()
+                        .format(document.data()['timestamp'].toDate()),
                     date: DateFormat.yMMMd()
                         .format(document.data()['timestamp'].toDate()),
                     status: document.data()['completed'].toString(),
