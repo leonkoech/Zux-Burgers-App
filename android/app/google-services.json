@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "172008523913",
+    "firebase_url": "https://zux-burgers.firebaseio.com",
+    "project_id": "zux-burgers",
+    "storage_bucket": "zux-burgers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172008523913:android:581a088ff07aa2f8e0de58",
+        "android_client_info": {
+          "package_name": "com.example.flutter_notifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172008523913-8gjdm8mom5uid7dn21mtgoh4d5810ch7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUSn6L-bCXJ9VRi-YMYy4iWO2h6tJpGmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172008523913-8gjdm8mom5uid7dn21mtgoh4d5810ch7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "172008523913-2f5da3fi6c6u7gaatmrouvrp221d3fof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zuxBurgers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172008523913:android:298da389ac2cc929e0de58",
+        "android_client_info": {
+          "package_name": "com.example.flutterapptest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172008523913-8gjdm8mom5uid7dn21mtgoh4d5810ch7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUSn6L-bCXJ9VRi-YMYy4iWO2h6tJpGmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172008523913-8gjdm8mom5uid7dn21mtgoh4d5810ch7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "172008523913-2f5da3fi6c6u7gaatmrouvrp221d3fof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zuxBurgers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172008523913:android:750cf19d47454bbbe0de58",
+        "android_client_info": {
+          "package_name": "com.example.zux_burgers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172008523913-8gjdm8mom5uid7dn21mtgoh4d5810ch7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUSn6L-bCXJ9VRi-YMYy4iWO2h6tJpGmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172008523913-8gjdm8mom5uid7dn21mtgoh4d5810ch7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "172008523913-2f5da3fi6c6u7gaatmrouvrp221d3fof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zuxBurgers"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
