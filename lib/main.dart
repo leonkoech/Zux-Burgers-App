@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
         title: 'Zux Burgers',
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          primaryColor: Color(0xff202020),
+          accentColor: Color(0xfff83131),
+          scaffoldBackgroundColor: Color(0xff202020),
         ),
         home: MyHomePage(
           title: 'Zux Burgers',
