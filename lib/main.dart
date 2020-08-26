@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
         title: 'Zux Burgers',
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          primaryColor: Color(0xff202020),
+          accentColor: Color(0xfff83131),
+          scaffoldBackgroundColor: Color(0xff202020),
         ),
         home: MyHomePage(
           title: 'Zux Burgers',
@@ -767,7 +770,7 @@ class _ViewOrderState extends State<ViewOrder> {
                         onPressed: () {
                           // Add your onPressed code here!
                           complete_order(
-                              widget.orderID, orderDetails["complete"]);
+                              widget.orderID, orderDetails.data()["complete"]);
                         },
                         label: Padding(
                           padding: const EdgeInsets.only(
@@ -1153,7 +1156,7 @@ class _StatsState extends State<Stats> {
   void queryMoneyThisMonthTotal() {
     FirebaseFirestore.instance
         .collection('burgerOrders')
-        .where('date', isGreaterThanOrEqualTo: oneWeekAgo())
+        .where('date', isGreaterThanOrEqualTo: oneMonthAgo())
         .where('date', isLessThanOrEqualTo: datetoday())
         .where("completed", isEqualTo: "1")
         .snapshots()
@@ -1219,7 +1222,7 @@ class _StatsState extends State<Stats> {
   void queryOrdersThisMonthTotal() {
     FirebaseFirestore.instance
         .collection('burgerOrders')
-        .where('date', isGreaterThanOrEqualTo: oneWeekAgo())
+        .where('date', isGreaterThanOrEqualTo: oneMonthAgo())
         .where('date', isLessThanOrEqualTo: datetoday())
         .where("completed", isEqualTo: "1")
         .snapshots()
@@ -1252,7 +1255,7 @@ class _StatsState extends State<Stats> {
   Future<String> totalOrderCountToday() async {
     QuerySnapshot _myDoc = await FirebaseFirestore.instance
         .collection('burgerOrders')
-        .where("date", isEqualTo: "2020/08/09")
+        .where("date", isEqualTo: datetoday())
         .get();
     List<DocumentSnapshot> _myDocCount = _myDoc.docs;
     return _myDocCount.length.toString(); // Count of Documents in Collection
